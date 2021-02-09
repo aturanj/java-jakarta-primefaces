@@ -1,1 +1,5 @@
 /target/
+.DS_Store
+.idea
+*.iml
+nb-configuration.xml

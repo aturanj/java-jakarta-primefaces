@@ -1,7 +1,7 @@
 package io.aturanj.sales.view.controllers;
 
 import io.aturanj.sales.model.Customer;
-import io.aturanj.sales.service.CustomerService;
+import io.aturanj.sales.service.ISalesService;
 import jakarta.ejb.EJB;
 import jakarta.inject.Named;
 import jakarta.faces.view.ViewScoped;
@@ -12,10 +12,10 @@ import java.util.List;
 @ViewScoped
 public class CustomerFacesController implements Serializable, IFacesController<Customer> {
 
-    @EJB
-    private CustomerService customerService;
+    @EJB(beanName = "CustomerService")
+    private ISalesService<Customer> customerService;
 
-    public List<Customer> customers;
+    private List<Customer> customers;
 
     @Override
     public List<Customer> findAll() {

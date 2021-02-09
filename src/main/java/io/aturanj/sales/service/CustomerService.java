@@ -3,10 +3,16 @@ package io.aturanj.sales.service;
 import io.aturanj.sales.model.Customer;
 import io.aturanj.sales.persistence.CustomerFacade;
 import jakarta.ejb.EJB;
+import jakarta.ejb.Local;
 import jakarta.ejb.Stateless;
 import java.util.List;
 
-@Stateless
+/**
+ *
+ * Use stateless name because of ISalesService
+ */
+@Stateless(name = "CustomerService")
+@Local
 public class CustomerService implements ISalesService<Customer> {
 
     @EJB
