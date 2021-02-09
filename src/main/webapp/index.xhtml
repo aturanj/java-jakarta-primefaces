@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <head>
+        <title>Sales App</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body>
+        <h:form>
+            <div class="card">
+                <p:dataTable var="customer" value="#{customerFacesController.customers}">
+
+                    <p:column headerText="First Name">
+                        <h:outputText value="#{customer.firstname}" />
+                    </p:column>
+
+                    <p:column headerText="Last Name">
+                        <h:outputText value="#{customer.lastname}" />
+                    </p:column>
+
+                    <p:column headerText="Street">
+                        <h:outputText value="#{customer.street}" />
+                    </p:column>
+
+                    <p:column headerText="City">
+                        <h:outputText value="#{customer.city}" />
+                    </p:column>
+                </p:dataTable>
+            </div>
+        </h:form>
+    </body>
+</html>
