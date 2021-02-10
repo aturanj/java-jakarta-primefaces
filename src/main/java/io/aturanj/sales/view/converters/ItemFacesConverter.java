@@ -1,6 +1,6 @@
 package io.aturanj.sales.view.converters;
 
-import io.aturanj.sales.model.Customer;
+import io.aturanj.sales.model.Item;
 import io.aturanj.sales.service.ISalesService;
 import jakarta.ejb.EJB;
 import jakarta.faces.component.UIComponent;
@@ -8,16 +8,16 @@ import jakarta.faces.context.FacesContext;
 import jakarta.faces.convert.Converter;
 import jakarta.faces.convert.FacesConverter;
 
-@FacesConverter(forClass = Customer.class)
-public class CustomerFacesConverter implements Converter {
+@FacesConverter(forClass = Item.class)
+public class ItemFacesConverter implements Converter {
 
-    @EJB(beanName = "CustomerService")
-    private ISalesService<Customer> customerService;
+    @EJB(beanName = "ItemService")
+    private ISalesService<Item> itemService;
 
     @Override
     public String getAsString(FacesContext context, UIComponent component, Object value) {
         if (value != null) {
-            return ((Customer) value).toString();
+            return ((Item) value).toString();
         }
         return null;
     }
@@ -25,12 +25,12 @@ public class CustomerFacesConverter implements Converter {
     @Override
     public Object getAsObject(FacesContext fc, UIComponent uic, String string) {
 
-        Customer customer = null;
+        Item item = null;
 
         if (string != null && !"".equals(string)) {
-            customer = this.customerService.find(new Integer(string));
+            item = this.itemService.find(new Integer(string));
         }
 
-        return customer;
+        return item;
     }
 }

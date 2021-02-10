@@ -14,7 +14,7 @@ import java.math.BigDecimal;
 import java.util.Objects;
 
 @Entity
-@Table(name = "INVOICE", catalog = "CUSTOMER", schema = "PUBLIC")
+@Table(name = "INVOICE", schema = "SALES")
 @NamedQueries({
     @NamedQuery(name = "Invoice.findAll", query = "SELECT i FROM Invoice i"),
     @NamedQuery(name = "Invoice.findByCustomerId", query = "SELECT i FROM Invoice i WHERE i.customer.id = :customerId"),

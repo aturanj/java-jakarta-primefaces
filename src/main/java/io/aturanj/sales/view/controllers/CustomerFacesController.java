@@ -3,13 +3,13 @@ package io.aturanj.sales.view.controllers;
 import io.aturanj.sales.model.Customer;
 import io.aturanj.sales.service.ISalesService;
 import jakarta.ejb.EJB;
-import jakarta.inject.Named;
-import jakarta.faces.view.ViewScoped;
 import java.io.Serializable;
 import java.util.List;
+import jakarta.enterprise.context.SessionScoped;
+import jakarta.inject.Named;
 
 @Named(value = "customerFacesController")
-@ViewScoped
+@SessionScoped
 public class CustomerFacesController implements Serializable, IFacesController<Customer> {
 
     @EJB(beanName = "CustomerService")
@@ -23,6 +23,7 @@ public class CustomerFacesController implements Serializable, IFacesController<C
     }
 
     public List<Customer> getCustomers() {
-        return findAll();
+        customers = findAll();
+        return customers;
     }
 }

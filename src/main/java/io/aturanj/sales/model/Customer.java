@@ -10,7 +10,7 @@ import jakarta.persistence.Table;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "CUSTOMER", catalog = "CUSTOMER", schema = "PUBLIC")
+@Table(name = "CUSTOMER", schema = "SALES")
 @NamedQueries({
     @NamedQuery(name = "Customer.findAll", query = "SELECT c FROM Customer c"),
     @NamedQuery(name = "Customer.findById", query = "SELECT c FROM Customer c WHERE c.id = :id"),

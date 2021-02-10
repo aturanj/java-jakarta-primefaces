@@ -12,7 +12,7 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 
 @Entity
-@Table(name = "ITEM", catalog = "CUSTOMER", schema = "PUBLIC")
+@Table(name = "ITEM", schema = "SALES")
 @NamedQueries({
     @NamedQuery(name = "Item.findAll", query = "SELECT i FROM Item i"),
     @NamedQuery(name = "Item.findByInvoiceid", query = "SELECT i FROM Item i WHERE i.itemPK.invoiceid = :invoiceid"),
