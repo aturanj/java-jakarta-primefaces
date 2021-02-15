@@ -7,29 +7,68 @@
     <f:view contentType="text/html;charset=UTF-8" encoding="UTF-8">
 
         <h:head>
+
             <title>Sales App</title>
+
+            <style type="text/css">
+                .ui-widget, .ui-widget .ui-widget {
+                    font-size: 85% !important;
+                }
+            </style>
         </h:head>
 
         <h:body>
+
             <h:form>
                 <div class="card" >
-                    <p:dataTable var="customer" value="#{customerFacesController.customers}">
 
-                        <p:column headerText="First Name">
+                    <p:dataTable var="customer" id="customers" value="#{customerFacesController.customers}"
+                                 rows="10" widgetVar="customersTable"
+                                 paginator="true" paginatorPosition="bottom"
+                                 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                 currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records"
+                                 rowsPerPageTemplate="5,10,{ShowAll|'All'}"
+                                 emptyMessage="No customers found with given criteria"
+                                 filteredValue="#{customerFacesController.customersFiltered}"
+                                 filterBy="#{customerFacesController.filterBy}">
+
+                        <f:facet name="header">
+                            <span>List of Customers</span>
+                            <!--
+                            <br/><br/>
+                            <div class="p-d-flex p-ai-center p-jc-between">
+                                <p:inputText id="globalFilter" onkeyup="PF('customersTable').filter()" style="width:10rem;" placeholder="Enter keyword"/>
+                            </div>
+                            -->
+                        </f:facet>
+
+                        <p:column headerText="First Name"
+                                  sortBy="#{customer.firstname}"
+                                  filterBy="#{customer.firstname}">
                             <h:outputText value="#{customer.firstname}"/>
                         </p:column>
 
-                        <p:column headerText="Last Name">
+                        <p:column headerText="Last Name"
+                                  sortBy="#{customer.lastname}"
+                                  filterBy="#{customer.lastname}">
                             <h:outputText value="#{customer.lastname}"/>
                         </p:column>
 
-                        <p:column headerText="Street">
+                        <p:column headerText="Street"
+                                  sortBy="#{customer.street}"
+                                  filterBy="#{customer.street}">
                             <h:outputText value="#{customer.street}"/>
                         </p:column>
 
-                        <p:column headerText="City">
+                        <p:column headerText="City"
+                                  sortBy="#{customer.city}"
+                                  filterBy="#{customer.city}">
                             <h:outputText value="#{customer.city}"/>
                         </p:column>
+
+                        <f:facet name="footer">
+                            <span class="p-text-bold">In total there are #{customerFacesController.customerCount} customers.</span>
+                        </f:facet>
                     </p:dataTable>
                 </div>
             </h:form>
