@@ -5,6 +5,7 @@ import io.aturanj.sales.persistence.CustomerFacade;
 import jakarta.ejb.EJB;
 import jakarta.ejb.Local;
 import jakarta.ejb.Stateless;
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -13,7 +14,7 @@ import java.util.List;
  */
 @Stateless(name = "CustomerService")
 @Local
-public class CustomerService implements ISalesService<Customer> {
+public class CustomerService implements ICustomerService {
 
     @EJB
     private CustomerFacade customerFacade;
@@ -41,5 +42,10 @@ public class CustomerService implements ISalesService<Customer> {
     @Override
     public List<Customer> findAll() {
         return customerFacade.findAll();
+    }
+
+    public Collection<String> findAllCities() {
+
+        return customerFacade.findAllCities();
     }
 }
