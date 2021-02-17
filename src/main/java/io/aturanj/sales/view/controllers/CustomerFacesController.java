@@ -11,7 +11,6 @@ import java.util.List;
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Named;
 import java.util.Collection;
-import org.primefaces.event.CellEditEvent;
 import org.primefaces.event.RowEditEvent;
 
 @Named(value = "customerFacesController")
@@ -50,6 +49,8 @@ public class CustomerFacesController implements Serializable, IFacesController<C
                 + String.valueOf(event.getObject().getFirstname() + " "
                         + event.getObject().getLastname()));
         FacesContext.getCurrentInstance().addMessage(null, msg);
+
+        customerService.edit(event.getObject());
     }
 
     public void onRowCancel(RowEditEvent<Customer> event) {
@@ -57,16 +58,6 @@ public class CustomerFacesController implements Serializable, IFacesController<C
                 + String.valueOf(event.getObject().getFirstname() + " "
                         + event.getObject().getLastname()));
         FacesContext.getCurrentInstance().addMessage(null, msg);
-    }
-
-    public void onCellEdit(CellEditEvent event) {
-        Object oldValue = event.getOldValue();
-        Object newValue = event.getNewValue();
-
-        if (newValue != null && !newValue.equals(oldValue)) {
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Cell Changed", "Old: " + oldValue + ", New:" + newValue);
-            FacesContext.getCurrentInstance().addMessage(null, msg);
-        }
     }
 
     public Collection<String> getCityList() {

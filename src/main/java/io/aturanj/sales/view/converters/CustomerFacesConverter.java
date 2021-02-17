@@ -2,7 +2,6 @@ package io.aturanj.sales.view.converters;
 
 import io.aturanj.sales.model.Customer;
 import io.aturanj.sales.service.ICustomerService;
-import io.aturanj.sales.service.ISalesService;
 import jakarta.ejb.EJB;
 import jakarta.faces.component.UIComponent;
 import jakarta.faces.context.FacesContext;
