@@ -13,7 +13,7 @@ import java.util.List;
  */
 @Stateless(name = "InvoiceService")
 @Local
-public class InvoiceService implements ISalesService<Invoice> {
+public class InvoiceService implements IInvoiceService {
 
     @EJB
     private InvoiceFacade invoiceFacade;
@@ -41,5 +41,10 @@ public class InvoiceService implements ISalesService<Invoice> {
     @Override
     public List<Invoice> findAll() {
         return invoiceFacade.findAll();
+    }
+
+    @Override
+    public List<Invoice> findByCustomer(Integer customerId) {
+        return invoiceFacade.findByCustomer(customerId);
     }
 }
