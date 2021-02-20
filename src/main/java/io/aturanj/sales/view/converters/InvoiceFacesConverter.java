@@ -1,7 +1,7 @@
 package io.aturanj.sales.view.converters;
 
 import io.aturanj.sales.model.Invoice;
-import io.aturanj.sales.service.ISalesService;
+import io.aturanj.sales.service.IInvoiceService;
 import jakarta.ejb.EJB;
 import jakarta.faces.component.UIComponent;
 import jakarta.faces.context.FacesContext;
@@ -12,7 +12,7 @@ import jakarta.faces.convert.FacesConverter;
 public class InvoiceFacesConverter implements Converter {
 
     @EJB(beanName = "InvoiceService")
-    private ISalesService<Invoice> invoiceService;
+    private IInvoiceService invoiceService;
 
     @Override
     public String getAsString(FacesContext context, UIComponent component, Object value) {

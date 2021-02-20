@@ -25,7 +25,7 @@ public class InvoiceFacade extends AbstractFacade<Invoice> {
     public List<Invoice> findByCustomer(Integer customerId) {
 
         Query query = em.createNamedQuery("Invoice.findByCustomerId");
-        query.setParameter("id", customerId);
+        query.setParameter("customerId", customerId);
 
         return query.getResultList();
     }
