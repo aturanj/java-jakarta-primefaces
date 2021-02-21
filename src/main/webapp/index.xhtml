@@ -11,8 +11,14 @@
             <title>Sales App</title>
 
             <style type="text/css">
+
                 .ui-widget, .ui-widget .ui-widget {
                     font-size: 85% !important;
+                }
+
+                .loading-icon {
+                    font-size: 3rem;
+                    color: var(--primary-color);
                 }
             </style>
         </h:head>
@@ -21,6 +27,14 @@
             <h:form id="form">
 
                 <p:growl id="msgs" showDetail="true"/>
+
+                <p:dialog widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
+                    <div class="p-text-center">
+                        <i class="pi pi-spin pi-spinner loading-icon" aria-hidden="true"></i>
+                    </div>
+                </p:dialog>
+
+                <p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()"/>
 
                 <div class="card" >
 
