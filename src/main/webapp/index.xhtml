@@ -36,7 +36,10 @@
                                  stickyHeader="true" stickyTopAt=".layout-topbar"
                                  stripedRows="true"
                                  reflow='true'
-                                 editable="true">
+                                 editable="true"
+                                 selectionMode="single"
+                                 selection="#{customerFacesController.selectedCustomer}"
+                                 rowKey="#{customer.id}">
 
                         <f:facet name="header">
                             <span>List of Customers</span>
@@ -44,6 +47,11 @@
 
                         <p:ajax event="rowEdit" listener="#{customerFacesController.onRowEdit}" update=":form:msgs"/>
                         <p:ajax event="rowEditCancel" listener="#{customerFacesController.onRowCancel}" update=":form:msgs"/>
+                        <p:ajax event="rowToggle" listener="#{invoiceFacesController.onRowToggle}"/>
+
+                        <p:column style="width:2rem">
+                            <p:rowToggler/>
+                        </p:column>
 
                         <p:column headerText="First Name"
                                   sortBy="#{customer.firstname}"
@@ -97,6 +105,36 @@
                         <p:column style="width:6rem">
                             <p:rowEditor editTitle="Edit Row" cancelTitle="Cancel Edit" saveTitle="Save Row"/>
                         </p:column>
+
+                        <p:rowExpansion>
+                            <div class="card">
+
+                                <p:treeTable var="invoiceTreeNode"
+                                             value="#{invoiceFacesController.invoicesByCustomer}">
+
+                                    <f:facet name="header">
+                                        Invoices of Customer
+                                    </f:facet>
+
+                                    <p:column headerText="Id">
+                                        <h:outputText value="#{invoiceTreeNode.id}" />
+                                    </p:column>
+
+                                    <p:column headerText="Customer Id">
+                                        <h:outputText value="#{invoiceTreeNode.customerName}" />
+                                    </p:column>
+
+                                    <p:column headerText="Total">
+                                        <h:outputText value="#{invoiceTreeNode.total}" />
+                                    </p:column>
+
+                                    <f:facet name="footer">
+                                        <span class="p-text-bold">In total there are #{invoiceFacesController.invoiceCount} invoices.</span>
+                                    </f:facet>
+
+                                </p:treeTable>
+                            </div>
+                        </p:rowExpansion>
 
                         <f:facet name="footer">
                             <span class="p-text-bold">In total there are #{customerFacesController.customerCount} customers.</span>

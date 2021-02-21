@@ -12,6 +12,8 @@ import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Named;
 import java.util.Collection;
 import org.primefaces.event.RowEditEvent;
+import org.primefaces.event.SelectEvent;
+import org.primefaces.event.UnselectEvent;
 
 @Named(value = "customerFacesController")
 @ViewScoped
@@ -23,6 +25,7 @@ public class CustomerFacesController implements Serializable, IFacesController<C
     private List<Customer> customers;
     private int customerCount;
     private Collection<String> cityList;
+    private Customer selectedCustomer;
 
     @PostConstruct
     private void init() {
@@ -68,4 +71,35 @@ public class CustomerFacesController implements Serializable, IFacesController<C
         this.cityList = cityList;
     }
 
+    public ICustomerService getCustomerService() {
+        return customerService;
+    }
+
+    public void setCustomerService(ICustomerService customerService) {
+        this.customerService = customerService;
+    }
+
+    public Customer getSelectedCustomer() {
+        return selectedCustomer;
+    }
+
+    public void setSelectedCustomer(Customer selectedCustomer) {
+        this.selectedCustomer = selectedCustomer;
+    }
+
+    public void onRowSelect(SelectEvent<Customer> event) {
+        FacesMessage msg = new FacesMessage("Customer Selected", String.valueOf(event.getObject().getFirstname() + " "
+                + event.getObject().getLastname()));
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+
+        setSelectedCustomer(event.getObject());
+    }
+
+    public void onRowUnselect(UnselectEvent<Customer> event) {
+        FacesMessage msg = new FacesMessage("Customer Unselected", String.valueOf(event.getObject().getFirstname() + " "
+                + event.getObject().getLastname()));
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+
+        setSelectedCustomer(null);
+    }
 }
