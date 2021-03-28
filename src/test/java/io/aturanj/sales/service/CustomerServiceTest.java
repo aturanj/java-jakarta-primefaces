@@ -57,8 +57,14 @@ public class CustomerServiceTest {
         customerService.create(entity);
 
         //then
+        Customer customer = customerService.find(CUSTOMER_ID);
+
+        assertNotNull(customer);
+
+        String result = customer.getFirstname();
         String expected = "Emily";
-        assertEquals(expected, customerService.find(111).getFirstname());
+
+        assertEquals(expected, result);
     }
 
     /**
